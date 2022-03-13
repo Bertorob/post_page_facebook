@@ -1,20 +1,23 @@
 import os, random
 import requests
 import shutil
+import json
 
-page_id = "your page id"
-token = "YOUR TOKEN"
-link =  f"https://graph.facebook.com//v13.0/{page_id}/photos"
+from src.lib.io import read_config
 
-def main():
+def main():   
+
+    config = read_config()
+    endpoint = f"https://graph.facebook.com//v13.0/{config['page_id']}/photos"
+
     image = random.choice(os.listdir("input"))
     myobj = {
-        'caption': "your image caption",
-        'access_token': token
+        'caption': config["post_caption"],
+        'access_token': config["access_token"]
     }
     files={"src": open("input/" + image, 'rb')}
 
-    x = requests.post(link, data = myobj, files=files)
+    x = requests.post(endpoint, data = myobj, files=files)
 
     print(x.text)
 
