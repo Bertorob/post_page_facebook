@@ -1,4 +1,4 @@
-# post_page_facebook
+# Post on facebook pages python
 Automatic facebook post for pages.
 
 # Getting started
